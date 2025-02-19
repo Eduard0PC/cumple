@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡japi verdei!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffcccb; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 1.5s ease-in-out; 
+        } 
+        h1 {
+            color: #d90429;
+            font-size: 10vw; 
+        }
+        p {
+            color: #333;
+            font-size: 6vw; 
+            padding: 0 20px;
+        }
+
+        .sho, .uy{
+            font-weight: bold;
+        }
+        
+        .frase {
+            font-weight: bold;
+            color: #d90429;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        button {
+            background-color: #d90429;
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 5vw; 
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #9c071e;
+        }
+
+        .container, .maspaya, .nomporta {
+            width: 100%;
+            min-height: 100vh; 
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-container {
+            width: 80%; 
+            height: auto; 
+            max-width: 100%; 
+            display: block; 
+            margin-top: 20px; 
+}
+
+        .maspaya {
+            background-color: transparent;
+            position: relative; 
+            width: 100%;
+            height: 100vh; 
+            overflow: hidden; 
+        }
+        
+        .maspaya p {
+            position: relative;
+            color: white; 
+            z-index: 1;
+        }
+        .maspaya img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            opacity: 0;
+            transition: opacity 15s ease-in-out;
+            filter: brightness(50%);
+        }
+
+        .maspaya img.visible {
+            opacity: 1;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+
+        .nomporta {
+            background-color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 6vw; }
+            p { font-size: 3vw; }
+            button { font-size: 2vw; padding: 15px; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡MUY FELIZ JAPI VERDEI! 🎂</h1>
+        <p>Os hago entrega de mis más grandes felicitaciones</p>
+        <p class="sho">De: Yo, Para: Tú</p>
+        <img src="src/bddog.webp" alt="Imagen de cumpleaños" class="img-container">
+    </div>
+    <div class="maspaya">
+        <p class="uy">Cada día más pa' allá que pa' acá</p>
+        <p class="uy">Porque cada vela pasada es un breve recordatorio de nuestra corta existencia en
+            este mundo terrenal</p>
+            <img src="src/catnt3.jpg" alt="filosofico" class="fade-in">
+    </div>
+    <div class="nomporta">
+        <p>Pero de eso se preocupa uno despues</p>
+        <p>De mientras pásele bien y disfruta de tu día, por que como una gran japones dijo: </p>
+        <p class="frase">“ これを翻訳して何をしているんですか笑笑 ”</p>
+        <p>Y la verdad que si tenia toda la cara llena de razón</p>
+        <img src="src/dogcake.webp" alt="Otra imagen" class="img-container">
+        <button onclick="aquenoteloesperabas()">Regalo sorpresa</button>
+    </div>
+
+    <script>
+        function aquenoteloesperabas() { 
+            alert("La sorpresa es este maravilloso mensaje emergente, ¡ojalá te haya gustado! :D");
+            document.body.style.backgroundColor = "black";
+            document.body.innerHTML = "<h1 style='color: white; font-size: 10vw;'>Autodestrucción de este mensaje en <span id='countdown'>5</span> segundos</h1>";
+            
+            let countdown = 5;
+            const countdownElement = document.getElementById('countdown');
+            
+            const interval = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    window.location.href = "https://www.youtube.com/watch?v=U7qESuhCqhg";  
+                }
+            }, 1000); 
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains("container")) {
+                        document.body.style.backgroundColor = "#ffcccb"; // Rosa
+                    }
+                    if (entry.target.classList.contains("maspaya")) {
+                        document.body.style.backgroundColor = "black"; 
+                        const img = entry.target.querySelector("img");
+                        if (img) {
+                            img.classList.add("visible");
+                        }
+                    }
+                    if (entry.target.classList.contains("nomporta")) {
+                        document.body.style.backgroundColor = "yellow"; 
+                    }
+                }
+            });
+        }, { threshold: 0.6 }); 
+
+        document.querySelectorAll(".container, .maspaya, .nomporta").forEach(div => {
+            observer.observe(div);
+        });
+    </script>
+</body>
+</html>
